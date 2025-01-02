@@ -2,6 +2,7 @@ import React from 'react'
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
+import axios from 'axios'
 
 const Signup = () => {
   const {
@@ -12,19 +13,19 @@ const Signup = () => {
   const router=useRouter();
 
   const onSubmit = (data) => {
+console.log("data",data);
 
     if(data){
-     localStorage.setItem("userlogin",JSON.stringify(data));
       
-      // axios.post("https://62172d3871e7672e5375b02f.mockapi.io/vijayapi/login",{
-      //   data
-      // }).then((res)=>{
-      //   if(res.status==201){
+      axios.post("https://62172d3871e7672e5375b02f.mockapi.io/vijayapi/login",{
+        data
+      }).then((res)=>{
+        if(res.status==201){
           // router.push("/"); 
           window.location.reload("/")
-      //   }
+        }
         
-      // })
+      })
     }
   }
   return (

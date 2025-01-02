@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
-const Login = () => {
+const Login = (props) => {
   const [login,setLogin]=useState({
     label:"Email Id or mobile number",
     name:"name",
@@ -12,6 +12,8 @@ const Login = () => {
     navurl:"/signup",
     url:"/login"
   })
+  console.log("props==",props);
+  
   const [error,setError]=useState(null)
 
   const {
@@ -20,13 +22,36 @@ const Login = () => {
     handleSubmit,
   } = useForm()
   const router=useRouter();
-
+const validate=(data,type=true)=>{
+  console.log("data===",data);
+  
+  props.users.map((e)=>{
+  if(type){
+    if(e.data.name==data.name){
+      return true;
+    }
+   else{
+    return false
+   }
+  }
+  else {
+    if(e.data.name==data.name&&e.data.password==data.password){
+return true
+    }
+    else{
+      return false
+    }
+  }
+  
+})
+}
   const onSubmit = (data) => {
     let getuser= JSON.parse(localStorage.getItem("userlogin"));
 
+console.log("email===",data,login);
 
-    if(login.type=="login"&&data && getuser!==null&& (data.name==getuser.email||data.name==getuser.password)){
-
+  //  if((login.type=="login"&&data && getuser!==null&& (data.name==getuser.email||data.password==getuser.password)||(data&&userdata&&validate(data)))){
+if(login.type=="login"&&data&&validate(data)){
 
 
      setLogin({
@@ -73,6 +98,7 @@ const Login = () => {
         
       }
     }
+
   }
   return (
     <div class="font-[sans-serif] bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4">

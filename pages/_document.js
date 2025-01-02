@@ -23,7 +23,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <title>Roofandfloor-the hindu</title>
+          <title>homepage</title>
           <meta content="IE=edge,chrome=1" httpEquiv="X-UA-Compatible" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
          
