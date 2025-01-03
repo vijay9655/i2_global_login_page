@@ -26,7 +26,6 @@ export default function Mainform() {
     }
   }
 
-console.log(errors);
 
 const companydetails=[
 

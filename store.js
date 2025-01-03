@@ -1,7 +1,12 @@
-import { createStore, applyMiddleware } from "redux";
-import {thunk} from "redux-thunk";
-import { rootReducer } from "./src/reducers";
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import {thunk} from 'redux-thunk';  // Ensure thunk is imported correctly
+import { userReducer } from './src/reducers/userReducers';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const rootReducer = combineReducers({
+  users: userReducer,
+  // Add any other reducers you have here
+});
 
-export default store;
+export const initializeStore = (preloadedState = {}) => {
+  return createStore(rootReducer, preloadedState, applyMiddleware(thunk));  // Applying middleware correctly
+};
